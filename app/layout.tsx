@@ -7,5 +7,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" data-theme="light"><body>{children}</body></html>;
+  return <html lang="en" data-theme="light" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: `(() => {
+    let saved;
+    try { saved = localStorage.getItem('portfolio-theme'); } catch {}
+    document.documentElement.dataset.theme = saved === 'light' || saved === 'dark'
+      ? saved : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  })();` }} /></head><body>{children}</body></html>;
 }
