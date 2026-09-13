@@ -133,9 +133,7 @@ button:focus-visible {
   grid-area: 1 / 1;
   display: none;
 }
-:root:not([data-theme='dark'])
-  .theme-button
-  .light-theme-icon.default-icon,
+:root:not([data-theme='dark']) .theme-button .light-theme-icon.default-icon,
 :root[data-theme='dark'] .theme-button .dark-theme-icon.default-icon {
   display: block;
 }
@@ -303,9 +301,7 @@ h2 {
   :root:not([data-theme='dark'])
     .theme-button:hover
     .light-theme-icon.default-icon,
-  :root[data-theme='dark']
-    .theme-button:hover
-    .dark-theme-icon.default-icon {
+  :root[data-theme='dark'] .theme-button:hover .dark-theme-icon.default-icon {
     display: none;
   }
   :root:not([data-theme='dark'])
@@ -526,6 +522,9 @@ html {
   flex-direction: column;
   gap: 4px;
 }
+.metadata-row-single {
+  grid-template-columns: 1fr;
+}
 .case-metadata span {
   font-size: 12px;
 }
@@ -556,6 +555,7 @@ html {
   padding-left: 21px;
 }
 .case-image {
+  position: relative;
   width: 100%;
   height: 340px;
   display: block;
@@ -598,6 +598,54 @@ html {
 }
 .info-grid-outcomes .info-card {
   min-height: 102px;
+}
+.retireus-job-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+.retireus-job-card {
+  min-height: 150px;
+}
+.retireus-job-card > p:first-child {
+  color: var(--muted);
+  font-weight: 500;
+}
+.retireus-job-card > p:nth-child(2) {
+  color: var(--foreground);
+}
+.retireus-job-card > p:last-child {
+  color: var(--button-hover-text);
+}
+.retireus-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+}
+.retireus-visual-card {
+  min-width: 0;
+  padding: 8px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--surface);
+}
+.retireus-visual-image {
+  height: auto;
+  aspect-ratio: 600 / 340;
+  border-radius: 8px;
+}
+.retireus-visual-copy {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  overflow: hidden;
+}
+.retireus-visual-copy p:last-child {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 16px;
 }
 .info-stack {
   display: flex;
@@ -784,12 +832,8 @@ html {
 :root:not([data-theme='dark'])
   .slider-arrow:not(:disabled)
   .arrow-light-default,
-:root[data-theme='dark']
-  .slider-arrow:not(:disabled)
-  .arrow-dark-default,
-:root:not([data-theme='dark'])
-  .slider-arrow:disabled
-  .arrow-light-disabled,
+:root[data-theme='dark'] .slider-arrow:not(:disabled) .arrow-dark-default,
+:root:not([data-theme='dark']) .slider-arrow:disabled .arrow-light-disabled,
 :root[data-theme='dark'] .slider-arrow:disabled .arrow-dark-disabled {
   display: block;
 }
@@ -843,10 +887,7 @@ html {
 .opened-image-content {
   position: relative;
   z-index: 1;
-  width: min(
-    calc(100vw - 240px),
-    calc((100vh - 120px) * 1.7647058824)
-  );
+  width: min(calc(100vw - 240px), calc((100vh - 120px) * 1.7647058824));
   max-width: 1200px;
   pointer-events: none;
 }
@@ -909,20 +950,44 @@ html {
   }
 }
 @keyframes slider-out-next {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(-24px); opacity: 0.96; }
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-24px);
+    opacity: 0.96;
+  }
 }
 @keyframes slider-in-next {
-  from { transform: translateX(24px) scale(0.98); opacity: 0.96; }
-  to { transform: translateX(0) scale(1); opacity: 1; }
+  from {
+    transform: translateX(24px) scale(0.98);
+    opacity: 0.96;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
 }
 @keyframes slider-out-previous {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(24px); opacity: 0.96; }
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(24px);
+    opacity: 0.96;
+  }
 }
 @keyframes slider-in-previous {
-  from { transform: translateX(-24px) scale(0.98); opacity: 0.96; }
-  to { transform: translateX(0) scale(1); opacity: 1; }
+  from {
+    transform: translateX(-24px) scale(0.98);
+    opacity: 0.96;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
 }
 .case-footer {
   width: min(600px, calc(100% - 40px));
@@ -1027,6 +1092,10 @@ html {
   .info-grid {
     grid-template-columns: 1fr;
   }
+  .retireus-job-grid,
+  .retireus-visual-grid {
+    grid-template-columns: 1fr;
+  }
   .info-grid-tall .info-card,
   .info-grid-outcomes .info-card {
     min-height: 82px;
@@ -1039,10 +1108,7 @@ html {
     aspect-ratio: 600 / 340;
   }
   .opened-image-content {
-    width: min(
-      calc(100vw - 40px),
-      calc((100vh - 100px) * 1.7647058824)
-    );
+    width: min(calc(100vw - 40px), calc((100vh - 100px) * 1.7647058824));
   }
   .process-diagram {
     height: auto;

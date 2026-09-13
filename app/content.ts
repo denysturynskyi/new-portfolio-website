@@ -39,7 +39,7 @@ export const portfolio = {
         'Platform combines financial tracking, advisor support, and personalised insights into one ecosystem designed for ongoing use.',
       image: '/assets/portfolio-retire-us.png',
       alt: 'RetireUS financial dashboard on a laptop',
-      href: '',
+      href: '/work/retireus',
     },
   ],
   experience: [

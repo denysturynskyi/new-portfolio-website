@@ -1,13 +1,14 @@
-import { FooterClock } from '../../footer-clock';
-import { ThemeControls } from '../../theme-controls';
-import type { ReactNode } from 'react';
-import Link from 'next/link';
 import {
   CaseStudyImage,
-  CopyLinkButton,
   ImageSlider,
   SidebarNavigation,
 } from './case-study-client';
+import {
+  CaseStudyFooter,
+  CaseStudyHeader,
+  InfoCard,
+  SectionHeading,
+} from '../case-study-layout';
 
 const activeLensImages = {
   overview: '/assets/active-lens-overview.png',
@@ -26,66 +27,10 @@ const activeLensImages = {
   ],
 };
 
-function InfoCard({ title, body }: { title: string; body: string }) {
-  return (
-    <article className="info-card">
-      <p>{title}</p>
-      <p>{body}</p>
-    </article>
-  );
-}
-
-function SectionHeading({
-  title,
-  children,
-}: {
-  title: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="case-heading">
-      <h2>{title}</h2>
-      <div className="case-body">{children}</div>
-    </div>
-  );
-}
-
 export default function ActiveLensCaseStudy() {
   return (
     <div className="case-page">
-      <header className="case-header">
-        <div className="case-header-actions">
-          <Link
-            className="back-button"
-            href="/"
-            aria-label="Back to portfolio homepage"
-          >
-            <img
-              className="back-default theme-light"
-              src="/assets/case-back-light.svg"
-              width="14"
-              height="14"
-              alt=""
-            />
-            <img
-              className="back-default theme-dark"
-              src="/assets/case-back-dark.svg"
-              width="14"
-              height="14"
-              alt=""
-            />
-            <img
-              className="back-hover"
-              src="/assets/case-back-hover.svg"
-              width="14"
-              height="14"
-              alt=""
-            />
-          </Link>
-          <ThemeControls />
-        </div>
-        <CopyLinkButton />
-      </header>
+      <CaseStudyHeader />
 
       <div className="case-sidebar-positioner">
         <SidebarNavigation />
@@ -453,10 +398,7 @@ export default function ActiveLensCaseStudy() {
         </section>
       </main>
 
-      <footer className="case-footer">
-        <span>© 2026</span>
-        <FooterClock />
-      </footer>
+      <CaseStudyFooter />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 
 export const caseSections = [
@@ -17,12 +18,16 @@ export const caseSections = [
   ['final-experience', 'Final Experience'],
 ] as const;
 
-export function SidebarNavigation() {
+export function SidebarNavigation({
+  sections = caseSections,
+}: {
+  sections?: ReadonlyArray<readonly [string, string]>;
+}) {
   const [active, setActive] = useState('overview');
 
   useEffect(() => {
     const updateActive = () => {
-      const current = [...caseSections].reverse().find(([id]) => {
+      const current = [...sections].reverse().find(([id]) => {
         const section = document.getElementById(id);
         return section && section.getBoundingClientRect().top <= 128;
       });
@@ -31,11 +36,11 @@ export function SidebarNavigation() {
     updateActive();
     window.addEventListener('scroll', updateActive, { passive: true });
     return () => window.removeEventListener('scroll', updateActive);
-  }, []);
+  }, [sections]);
 
   return (
     <nav className="case-sidebar" aria-label="Case study sections">
-      {caseSections.map(([id, label]) => (
+      {sections.map(([id, label]) => (
         <a
           className={`sidebar-item${active === id ? ' is-active' : ''}`}
           href={`#${id}`}
@@ -80,12 +85,16 @@ function OpenedImageOverlay({
   images,
   index,
   alt,
+  imageClassName = '',
+  imageStyle,
   onIndexChange,
   onClose,
 }: {
   images: string[];
   index: number;
   alt: string;
+  imageClassName?: string;
+  imageStyle?: CSSProperties;
   onIndexChange?: (index: number) => void;
   onClose: () => void;
 }) {
@@ -96,24 +105,27 @@ function OpenedImageOverlay({
   const animationTimer = useRef<number | null>(null);
   const hasSliderControls = Boolean(onIndexChange);
 
-  const navigate = useCallback((nextIndex: number) => {
-    if (
-      isAnimating ||
-      nextIndex < 0 ||
-      nextIndex >= images.length ||
-      nextIndex === index
-    ) {
-      return;
-    }
-    setPreviousIndex(index);
-    setDirection(nextIndex > index ? 'next' : 'previous');
-    setIsAnimating(true);
-    onIndexChange?.(nextIndex);
-    animationTimer.current = window.setTimeout(() => {
-      setIsAnimating(false);
-      setPreviousIndex(null);
-    }, 500);
-  }, [images.length, index, isAnimating, onIndexChange]);
+  const navigate = useCallback(
+    (nextIndex: number) => {
+      if (
+        isAnimating ||
+        nextIndex < 0 ||
+        nextIndex >= images.length ||
+        nextIndex === index
+      ) {
+        return;
+      }
+      setPreviousIndex(index);
+      setDirection(nextIndex > index ? 'next' : 'previous');
+      setIsAnimating(true);
+      onIndexChange?.(nextIndex);
+      animationTimer.current = window.setTimeout(() => {
+        setIsAnimating(false);
+        setPreviousIndex(null);
+      }, 500);
+    },
+    [images.length, index, isAnimating, onIndexChange],
+  );
 
   const requestClose = useCallback(() => {
     if (isClosing) return;
@@ -172,13 +184,15 @@ function OpenedImageOverlay({
         <div className="opened-image-frame">
           {isAnimating && previousIndex !== null ? (
             <img
-              className={`opened-image-outgoing is-${direction}`}
+              className={`${imageClassName}${imageClassName ? ' ' : ''}opened-image-outgoing is-${direction}`}
+              style={imageStyle}
               src={images[previousIndex]}
               alt=""
             />
           ) : null}
           <img
-            className={isAnimating ? `opened-image-incoming is-${direction}` : ''}
+            className={`${imageClassName}${imageClassName && isAnimating ? ' ' : ''}${isAnimating ? `opened-image-incoming is-${direction}` : ''}`}
+            style={imageStyle}
             src={images[index]}
             alt={alt}
           />
@@ -279,24 +293,61 @@ function OpenedImageOverlay({
   );
 }
 
-export function CaseStudyImage({ src, alt }: { src: string; alt: string }) {
+export function CaseStudyImage({
+  src,
+  alt,
+  className = '',
+  imageClassName = '',
+  crop,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  imageClassName?: string;
+  crop?: {
+    width: string;
+    height: string;
+    left: string;
+    top: string;
+    background?: string;
+  };
+}) {
   const [isOpen, setIsOpen] = useState(false);
+  const imageStyle: CSSProperties | undefined = crop
+    ? {
+        position: 'absolute',
+        width: crop.width,
+        maxWidth: 'none',
+        height: crop.height,
+        left: crop.left,
+        top: crop.top,
+        objectFit: 'cover',
+      }
+    : undefined;
 
   return (
     <>
       <button
-        className="case-image"
+        className={`case-image${className ? ` ${className}` : ''}`}
+        style={crop?.background ? { background: crop.background } : undefined}
         type="button"
         aria-label={`Open ${alt}`}
         onClick={() => setIsOpen(true)}
       >
-        <img src={src} alt={alt} />
+        <img
+          className={imageClassName}
+          style={imageStyle}
+          src={src}
+          alt={alt}
+        />
       </button>
       {isOpen ? (
         <OpenedImageOverlay
           images={[src]}
           index={0}
           alt={alt}
+          imageClassName={imageClassName}
+          imageStyle={imageStyle}
           onClose={() => setIsOpen(false)}
         />
       ) : null}
