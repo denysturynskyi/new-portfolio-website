@@ -653,6 +653,56 @@ html {
   flex-direction: column;
   gap: 4px;
 }
+.genfeed-three-column-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.genfeed-detail-card {
+  min-height: 150px;
+}
+.genfeed-detail-card > p:first-child {
+  color: var(--muted);
+  font-weight: 500;
+}
+.genfeed-detail-card > p:nth-child(2) {
+  color: var(--foreground);
+}
+.genfeed-detail-card > p:last-child {
+  color: var(--button-hover-text);
+}
+.genfeed-process {
+  height: 144px;
+  display: flex;
+  align-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.genfeed-process-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.genfeed-process-item p {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font-size: 12px;
+  line-height: normal;
+  white-space: nowrap;
+}
+.genfeed-process-item span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 16px;
+}
 .process-diagram {
   position: relative;
   height: 340px;
@@ -1094,8 +1144,23 @@ html {
     grid-template-columns: 1fr;
   }
   .retireus-job-grid,
-  .retireus-visual-grid {
+  .retireus-visual-grid,
+  .genfeed-three-column-grid {
     grid-template-columns: 1fr;
+  }
+  .genfeed-process {
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .genfeed-process-item {
+    flex-direction: column;
+  }
+  .genfeed-process-item span {
+    transform: rotate(90deg);
+  }
+  .genfeed-process-item p {
+    justify-content: center;
   }
   .info-grid-tall .info-card,
   .info-grid-outcomes .info-card {

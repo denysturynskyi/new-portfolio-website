@@ -33,6 +33,15 @@ export const portfolio = {
       href: '/work/retireus',
     },
     {
+      slug: 'genfeed',
+      title: 'genFEED. AI creator platform for video creators',
+      description:
+        'Platform helps creators showcase their work, build a recognizable profile, get discovered, and share their work beyond the platform.',
+      image: '/assets/portfolio-genfeed.png',
+      alt: 'genFEED creator platform on a desktop display',
+      href: '/work/genfeed',
+    },
+    {
       slug: 'fairo',
       title: 'Fairo. Financial app from Raiffeisen Bank',
       description:
