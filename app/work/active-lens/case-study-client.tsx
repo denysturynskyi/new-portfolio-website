@@ -55,9 +55,24 @@ export function SidebarNavigation({
 }
 
 export function CopyLinkButton() {
+  const [copyFeedback, setCopyFeedback] = useState(0);
+  const feedbackTimer = useRef<number | null>(null);
+
+  useEffect(
+    () => () => {
+      if (feedbackTimer.current !== null) {
+        window.clearTimeout(feedbackTimer.current);
+      }
+    },
+    [],
+  );
+
   async function copyCurrentUrl() {
+    let copied = false;
+
     try {
       await navigator.clipboard.writeText(window.location.href);
+      copied = true;
     } catch {
       const input = document.createElement('textarea');
       input.value = window.location.href;
@@ -65,19 +80,39 @@ export function CopyLinkButton() {
       input.style.opacity = '0';
       document.body.appendChild(input);
       input.select();
-      document.execCommand('copy');
+      copied = document.execCommand('copy');
       input.remove();
+    }
+
+    if (copied) {
+      setCopyFeedback((value) => value + 1);
+      if (feedbackTimer.current !== null) {
+        window.clearTimeout(feedbackTimer.current);
+      }
+      feedbackTimer.current = window.setTimeout(() => setCopyFeedback(0), 2500);
     }
   }
 
   return (
-    <button
-      className="pill case-copy-link"
-      type="button"
-      onClick={copyCurrentUrl}
-    >
-      Copy link
-    </button>
+    <div className="copy-link-control">
+      <button
+        className="pill case-copy-link"
+        type="button"
+        onClick={copyCurrentUrl}
+      >
+        Copy link
+      </button>
+      {copyFeedback > 0 ? (
+        <span
+          className="copy-link-feedback"
+          key={copyFeedback}
+          role="status"
+          aria-live="polite"
+        >
+          Link copied
+        </span>
+      ) : null}
+    </div>
   );
 }
 

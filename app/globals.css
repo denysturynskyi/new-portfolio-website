@@ -439,6 +439,35 @@ html {
 .case-copy-link {
   min-width: 81px;
 }
+.copy-link-control {
+  position: relative;
+  flex-shrink: 0;
+}
+.copy-link-feedback {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 1;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: copy-link-feedback 2500ms ease-in-out both;
+}
+@keyframes copy-link-feedback {
+  0%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 .case-sidebar-positioner {
   position: absolute;
   top: 200px;
