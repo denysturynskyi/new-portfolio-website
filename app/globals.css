@@ -200,7 +200,7 @@ h2 {
 }
 :root:not([data-theme='dark']) .page-shell .intro-copy > p,
 :root:not([data-theme='dark']) .page-shell .experience p {
-  font-weight: 300;
+  font-weight: 400;
 }
 .elsewhere {
   display: flex;
@@ -624,8 +624,9 @@ html {
 }
 .retireus-visual-card {
   min-width: 0;
-  padding: 8px;
+  padding: 7px;
   overflow: hidden;
+  border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--surface);
 }

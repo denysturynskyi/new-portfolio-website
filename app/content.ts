@@ -24,15 +24,6 @@ export const portfolio = {
       href: '/work/active-lens',
     },
     {
-      slug: 'fairo',
-      title: 'Fairo. Financial app from Raiffeisen Bank',
-      description:
-        'The app simplifies financial admin tasks by combining Invoicing, Bookkeeping, and Reporting into one seamless experience.',
-      image: '/assets/portfolio-fairo.png',
-      alt: 'Fairo financial app on a phone held in a hand',
-      href: '',
-    },
-    {
       slug: 'retire-us',
       title: 'RetireUS. Fintech platform for USA market',
       description:
@@ -40,6 +31,15 @@ export const portfolio = {
       image: '/assets/portfolio-retire-us.png',
       alt: 'RetireUS financial dashboard on a laptop',
       href: '/work/retireus',
+    },
+    {
+      slug: 'fairo',
+      title: 'Fairo. Financial app from Raiffeisen Bank',
+      description:
+        'The app simplifies financial admin tasks by combining Invoicing, Bookkeeping, and Reporting into one seamless experience.',
+      image: '/assets/portfolio-fairo.png',
+      alt: 'Fairo financial app on a phone held in a hand',
+      href: '',
     },
   ],
   experience: [
