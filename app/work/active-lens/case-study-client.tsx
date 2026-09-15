@@ -27,6 +27,15 @@ export function SidebarNavigation({
 
   useEffect(() => {
     const updateActive = () => {
+      const isAtPageEnd =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 1;
+
+      if (isAtPageEnd) {
+        setActive(sections[sections.length - 1]?.[0] ?? 'overview');
+        return;
+      }
+
       const current = [...sections].reverse().find(([id]) => {
         const section = document.getElementById(id);
         return section && section.getBoundingClientRect().top <= 128;

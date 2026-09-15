@@ -48,7 +48,7 @@ export const portfolio = {
         'The app simplifies financial admin tasks by combining Invoicing, Bookkeeping, and Reporting into one seamless experience.',
       image: '/assets/portfolio-fairo.png',
       alt: 'Fairo financial app on a phone held in a hand',
-      href: '',
+      href: '/work/fairo',
     },
   ],
   experience: [

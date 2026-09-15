@@ -732,6 +732,18 @@ html {
   font-size: 12px;
   line-height: 16px;
 }
+.fairo-three-column-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.fairo-metric-grid .info-card {
+  min-height: 80px;
+}
+.fairo-research-grid .info-card {
+  min-height: 140px;
+}
+.fairo-scope-grid .info-card {
+  min-height: 120px;
+}
 .process-diagram {
   position: relative;
   height: 340px;
@@ -1174,7 +1186,8 @@ html {
   }
   .retireus-job-grid,
   .retireus-visual-grid,
-  .genfeed-three-column-grid {
+  .genfeed-three-column-grid,
+  .fairo-three-column-grid {
     grid-template-columns: 1fr;
   }
   .genfeed-process {
