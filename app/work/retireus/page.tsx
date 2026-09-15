@@ -160,13 +160,6 @@ export default function RetireUsCaseStudy() {
           <CaseStudyImage
             src={retireUsImages.overview}
             alt="RetireUS retirement planning platform on a laptop"
-            crop={{
-              width: '155.63%',
-              height: '205.29%',
-              left: '-35.66%',
-              top: '-52.65%',
-              background: '#e5e5e5',
-            }}
           />
         </section>
 
