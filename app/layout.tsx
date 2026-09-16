@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -12,5 +13,5 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     try { saved = localStorage.getItem('portfolio-theme'); } catch {}
     document.documentElement.dataset.theme = saved === 'light' || saved === 'dark'
       ? saved : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  })();` }} /></head><body>{children}</body></html>;
+  })();` }} /></head><body>{children}<Analytics /></body></html>;
 }
