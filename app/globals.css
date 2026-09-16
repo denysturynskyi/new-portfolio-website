@@ -91,6 +91,26 @@ button:focus-visible {
   gap: 120px;
   padding-top: 200px;
 }
+.home-cat {
+  display: none;
+}
+@media (min-width: 1121px) {
+  .home-cat {
+    position: fixed;
+    z-index: 5;
+    right: 40px;
+    bottom: 0;
+    display: block;
+    width: 28px;
+    height: 28px;
+    max-width: none;
+    pointer-events: none;
+    image-rendering: pixelated;
+  }
+}
+:root[data-theme='dark'] .home-cat {
+  filter: invert(1);
+}
 .header {
   position: fixed;
   z-index: 10;

@@ -108,6 +108,14 @@ export default function Home() {
         <ThemeControls />
         <Button href={`mailto:${p.email}`}>Say hi</Button>
       </header>
+      <img
+        className="home-cat"
+        src="/assets/cat.svg"
+        width="28"
+        height="28"
+        alt=""
+        aria-hidden="true"
+      />
       <main>
         <section className="intro" aria-label="About Denys">
           <div className="identity">
